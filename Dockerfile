@@ -9,14 +9,6 @@ RUN npm run build
 # Build final image with Python + built frontend
 FROM python:3.13-slim
 
-# Install Node.js and npm for frontend
-RUN apt-get update && apt-get install -y \
-    curl \
-    && curl -fsSL https://deb.nodesource.com/20.x | bash - \
-    && apt-get install -y nodejs \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
 # Install uv
 RUN pip install --no-cache-dir uv
 
@@ -33,20 +25,16 @@ RUN uv sync --frozen
 # Copy built frontend
 COPY --from=frontend-builder /frontend/dist ./frontend/dist
 
-# Copy frontend source for dev server
-COPY frontend /app/frontend
-RUN cd /app/frontend && npm install
-
 # Copy start script
 COPY start.sh ./
 RUN chmod +x start.sh
 
-# Expose ports
-EXPOSE 8001 5173
+# Expose port
+EXPOSE 8080
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV PORT=8001
+ENV PORT=8080
 
 # Start command
 CMD ["uv", "run", "python", "-m", "backend.main"]

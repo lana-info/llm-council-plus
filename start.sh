@@ -6,8 +6,8 @@ echo "Starting LLM Council..."
 echo ""
 
 # Start backend
-echo "Starting backend on http://localhost:8001..."
-uv run python -m backend.main &
+echo "Starting backend on http://0.0.0.0:${PORT:-8080}..."
+uv run uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080} &
 BACKEND_PID=$!
 
 # Wait a bit for backend to start
@@ -21,7 +21,7 @@ FRONTEND_PID=$!
 
 echo ""
 echo "✓ LLM Council is running!"
-echo "  Backend:  http://localhost:8001"
+echo "  Backend: http://0.0.0.0:${PORT:-8080}"
 echo "  Frontend: http://localhost:5173"
 echo ""
 echo "Press Ctrl+C to stop both servers"

@@ -2,6 +2,11 @@
 
 ![LLM Council Plus](header.png)
 
+## 🚀 Quick Deploy
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/llm-council-plus?referralCode=lana)
+
+
 > **Collective AI Intelligence** — Instead of asking one LLM, convene a council of AI models that deliberate, peer-review, and synthesize the best answer.
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)

@@ -37,4 +37,4 @@ ENV PYTHONUNBUFFERED=1
 ENV PORT=8080
 
 # Start command
-CMD ["uv", "run", "python", "-m", "backend.main"]
+CMD ["sh", "-c", "uv run uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
